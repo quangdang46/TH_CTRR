@@ -1,57 +1,52 @@
-def truth_table():
-  print('p', 'q', 'p v q', 'p ∧ q', '¬p v ¬q')
-  for p in [True, False]:
-    for q in [True, False]:
-      print(p, q, p or q, p and q, not p or not q)
+import itertools
+def lImplies(P,Q):
+	if P:
+		return Q
+	return True
 
-def truth_table2():
-  print('p', 'q', 'r', '¬p v (q ∧ r)', 'r')
-  for p in [True, False]:
-    for q in [True, False]:
-      for r in [True, False]:
-        print(p, q, r, not p or (q and r), r)
+def lAnd(P,Q):
+	if P:
+		return Q
+	return False
 
-def truth_table3():
-  print('p', 'q', 'r', '(p → q)', '(q → r)', '(p → q) ∧ (q → r)')
-  for p in [True, False]:
-    for q in [True, False]:
-      for r in [True, False]:
-        print(p, q, r, not p or q, not q or r, (not p or q) and (not q or r))
+def lOr(P,Q):
+	if not P:
+		return Q
+	return True
 
-def truth_table4():
-  print('p', 'q', 'r', '(p v (q ∧ r))', '((p v q) ∧ (p v r))')
-  for p in [True, False]:
-    for q in [True, False]:
-      for r in [True, False]:
-        print(p, q, r, p or (q and r), (p or q) and (p or r))
+def lXor(P,Q):
+	return P!=Q
 
-def truth_table5():
-  print('p', 'q', 'r', 'p v q', '¬r v t', 'p v q → ¬r v t')
-  for p in [True, False]:
-    for q in [True, False]:
-      for r in [True, False]:
-        print(p, q, r, p or q, not r or True, (p or q) and (not r or True))
+def lNot(P):
+	if P:
+		return False
+	return True
 
-def truth_table6():
-  print('p', 'q', 'r', 'p v t', 'q', 'r', 't', 'p v t → q → (r → t)')
-  for p in [True, False]:
-    for q in [True, False]:
-      for r in [True, False]:
-        for t in [True, False]:
-          print(p, q, r, p or True, q, r, t, (p or True) and q and (r or t))
+def lEquipvalent(P,Q):
+	return P==Q
+# Ex4
+table=list(itertools.product([False,True],repeat=3))
 
-def truth_table7():
-  print('p', 'q', 'r', 'p v (q ∧ r)', '((p v q) ∧ (p v r))', 't v ¬t', '(p v (q ∧ r)) ↔ (((p v q) ∧ (p v r)) ∧ (t v ¬t))')
-  for p in [True, False]:
-    for q in [True, False]:
-      for r in [True, False]:
-        print(p, q, r, p or (q and r), (p or q) and (p or r), True or not True, (p or (q and r)) == (((p or q) and (p or r)) and (True or not True)))
+# p ∨ q → p ∧ q → ¬p ∨ ¬q
+print("p\tq\tp V q\tp ∧ q\t¬p V ¬q\tp V q → p ∧ q → ¬p V ¬q")
+for (p,q,r) in table:
+	pOrq=lOr(p,q)
+	pAndq=lAnd(p,q)
+	notPOrnotQ=lOr(lNot(p),lNot(q))
+	print(p,"\t",q,"\t",pOrq,"\t",pAndq,"\t",notPOrnotQ,"\t",lImplies(lImplies(pOrq,pAndq),notPOrnotQ))
 
+# ¬p ∨ (q ∧ r) → r
+print("p\tq\tr\t¬p\tq ∧ r\t¬p V (q ∧ r)\t¬p V (q ∧ r) → r")
 
-truth_table()
-truth_table2()
-truth_table3()
-truth_table4()
-truth_table5()
-truth_table6()
-truth_table7()
+for (p,q,r) in table:
+	notP=lNot(p)
+	qAndr=lAnd(q,r)
+	notPOrqAndr=lOr(notP,qAndr)
+	print(p,"\t",q,"\t",r,"\t",notP,"\t",qAndr,"\t",notPOrqAndr,"\t",lImplies(notPOrqAndr,r))
+
+# (p → q) ∧ (q → r)
+print("p\tq\tr\tp → q\tq → r\t(p → q) ∧ (q → r)")
+for (p,q,r) in table:
+	pq=lImplies(p,q)
+	qr=lImplies(q,r)
+	print(p,"\t",q,"\t",r,"\t",pq,"\t",qr,"\t",lAnd(pq,qr))

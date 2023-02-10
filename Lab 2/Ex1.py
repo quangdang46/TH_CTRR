@@ -1,29 +1,27 @@
-def lImplies(p,q):
-  return not p or q
+import itertools
+# Ex1
+def lImplies(P,Q):
+	if P:
+		return Q
+	return True
 
-def lAnd(p,q):
-  return p and q
+def lAnd(P,Q):
+	if P:
+		return Q
+	return False
 
-def lOr(p,q):
-  return p or q
+def lOr(P,Q):
+	if not P:
+		return Q
+	return True
 
-def lXor(p,q):
-  return p != q
+def lXor(P,Q):
+	return P!=Q
 
-def lNot(p):
-  return not p  
+def lNot(P):
+	if P:
+		return False
+	return True
 
-def lEquivalent(p,q):
-  return p == q
-
-
-p = True
-q = False
-print("p = ", p)
-print("q = ", q)
-print("p implies q = ", lImplies(p,q))
-print("p and q = ", lAnd(p,q))
-print("p or q = ", lOr(p,q))
-print("p xor q = ", lXor(p,q))
-print("not p = ", lNot(p))
-print("p equivalent q = ", lEquivalent(p,q))
+def lEquipvalent(P,Q):
+	return P==Q

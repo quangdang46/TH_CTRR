@@ -1,29 +1,56 @@
-def lLImplies(P, Q):
-  return [not p or q for p, q in zip(P, Q)]
+import itertools
+# Ex1
+def lImplies(P,Q):
+	if P:
+		return Q
+	return True
 
-def lLAnd(P, Q):
-  return [p and q for p, q in zip(P, Q)]
+def lAnd(P,Q):
+	if P:
+		return Q
+	return False
 
-def lLOr(P, Q):
-  return [p or q for p, q in zip(P, Q)]
+def lOr(P,Q):
+	if not P:
+		return Q
+	return True
 
-def lLXor(P, Q):
-  return [p != q for p, q in zip(P, Q)]
+def lXor(P,Q):
+	return P!=Q
+
+def lNot(P):
+	if P:
+		return False
+	return True
+
+def lEquipvalent(P,Q):
+	return P==Q
+
+# Ex2
+P=[True,True,False,False]
+Q=[True,False,True,False]
+
+def lLImplies(P,Q):
+	return [lImplies(p,q) for p,q in zip(P,Q)]
+
+def lLAnd(P,Q):
+	return [lAnd(p,q) for p,q in zip(P,Q)]
+
+def lLOr(P,Q):
+	return [lOr(p,q) for p,q in zip(P,Q)]
+
+def lLXor(P,Q):
+	return [lXor(p,q) for p,q in zip(P,Q)]
 
 def lLNot(P):
-  return [not p for p in P]
+	return [lNot(p) for p in P]
 
-def lLEquivalent(P, Q):
-  return [p == q for p, q in zip(P, Q)]
+def lLEquipvalent(P,Q):
+	return [lEquipvalent(p,q) for p,q in zip(P,Q)]
 
-P = [True, True, False, False]
-Q = [True, False, True, False]
-print("P = ", P)
-print("Q = ", Q)
-print("P implies Q = ", lLImplies(P, Q))
-print("P and Q = ", lLAnd(P, Q))
-print("P or Q = ", lLOr(P, Q))
-print("P xor Q = ", lLXor(P, Q))
-print("not P = ", lLNot(P))
-print("P equivalent Q = ", lLEquivalent(P, Q))
-
+print(lLImplies(P,Q))
+print(lLAnd(P,Q))
+print(lLOr(P,Q))
+print(lLXor(P,Q))
+print(lLNot(P))
+print(lLEquipvalent(P,Q))
