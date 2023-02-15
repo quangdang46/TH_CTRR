@@ -1,26 +1,34 @@
+# Ex4
+listExpression=[
+	"For all people, if they are blond then they are westerners",
+	"Exist a person, whose hair is black but is a westerner",
+	"For all students, if they study correctly then they have high score",
+	"For every mammal, if they live in the sea, they are either dolphins or whales",
+	"For every bird, if they don't have wings and can swim then they are penguins",
+	"Exist a bird, who have wing but can't fly"
+]
 def formalConvertPQ(S):
-    mappings = {
-        "people": ("people", "is blond", "is westerner"),
-        "students": ("students", "study correctly", "have high score"),
-        "mammals": ("mammals", "live in the sea", "are either dolphins or whales"),
-        "birds don't have wings and can swim": ("birds", "don't have wings and can swim", "are penguins"),
-        "birds have wing but can't fly": ("birds", "have wings but can't fly", "")
-    }
-    words = S.split()
-    key = " ".join(words[2:])
-    if key not in mappings:
-        print("Error: Invalid input string")
-        return "", "", "", "Error: Invalid input string"
-    D, P, Q = mappings[key]
+	mappings = {
+		"people": ("people", "is blond", "is westerner"),
+		"students": ("students", "study correctly", "have high score"),
+		"mammal": ("mammal", "live in the sea", "are either dolphins or whales"),
+		"bird": ("birds", "don't have wings and can swim", "are penguins"),
+		"a bird": ("birds", "have wings but can't fly", ""),
+		"a person":("a person","hair is black","is westerner")
+	}
+	list_=["For all","Exist","For every"]
+	arr=S.split(",")
+	D=arr[0].replace(list(filter(lambda x:x in arr[0],list_))[0],"").strip()
+	if D not in mappings:
+		return "", "", "", "Error: Invalid input string"
+	D, P, Q = mappings[D]
+	if Q:
+		F = f"For all {D}, if they {P}, then they {Q}."
+	else:
+		F = f"Exist a {D} that {P}."
 
-    if Q:
-        F = f"For all {D}, if they {P}, then they {Q}."
-    else:
-        F = f"Exist a {D} that {P}."
+	return [D, P, Q, F]
 
-    return D, P, Q, F
-D, P, Q, F = formalConvertPQ("Exist a person, whose hair is black but is a westerner")
-print("D:", D)
-print("P:", P)
-print("Q:", Q)
-print("Formal statement:", F)
+
+for s in listExpression:
+	print(formalConvertPQ(s))

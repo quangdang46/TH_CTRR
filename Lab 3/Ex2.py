@@ -1,26 +1,15 @@
+# Ex2
+listExpression=['For all fishes, they need water to survive',
+                "Exist a person, who is left handed",
+                "Exist an employee in the company, who is late to work everyday",
+                "For all fishes in this pond, they are Koi fish",
+                "There is at least one creature in the ocean, it can live on land",
+]
 def formalConvert(S):
-  word = S.split()
-  if word[0] == "For":
-    qualifier='For all'
-    D = word[3]
-    P = ' '.join(word[5:])
-  elif word[0] == "Exist":
-    qualifier='Exist'
-    D = word[3]
-    P = ' '.join(word[5:])
-  elif word[0] == "There":
-    qualifier='Exist'
-    D = word[5]
-    P = ' '.join(word[7:])
-  F = qualifier + ' x in ' + D + ', ' + P+'(x)'
-  return D,P,F
-
-
-
-
-
-S = "For all fishes, they need water to survive."
-D,P,F = formalConvert(S)
-print("D is",D)
-print("P is",P)
-print("Formal form:",F)
+	list_=["For all","Exist","There is at least one"]
+	arr=S.split(",")
+	D=arr[0].replace(list(filter(lambda x:x in arr[0],list_))[0],"").strip()
+	P=" ".join(arr[1].strip().split()[1:])
+	return [D,P]
+for s in listExpression:
+	print(formalConvert(s))

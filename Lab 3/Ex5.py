@@ -1,13 +1,27 @@
-def nega(A):
-  if A[0:3] == "For":
-      print("Exist",A[4:])
-  elif A[0:4] == "Exist":
-      print("For all",A[5:])
-  else:
-      print("Error")
-nega("For all fishes, they need water to survive.")
-nega("Exist a person, who is left handed")
-nega("Exist an employee in the company, who is late to work everyday.")
-nega("For all fishes in this pond, they are Koi fish.")
-nega("There is at least one creature in the ocean, it can live on land")
-nega("Every students in class A did not pass the test")
+# Ex5
+listExpression=["For all fishes, they need water to survive",
+				"Exist a person, who is left handed",
+				"Exist an employee in the company, who is late to work everyday",
+				"For all fishes in this pond, they are Koi fish",
+				"There is at least one creature in the ocean, it can live on land"]
+def nega(S):
+	list_=["For all","Exist","There is at least one"]
+
+	neagation={
+		"For all":lambda x,y:"There exist "+x+ "such that not "+y,
+		"Exist":lambda x,y:"For every "+x+", not "+y,
+		"There is at least one":lambda x,y:"not "+x+", "+y
+	}
+	arr=S.split(",")
+	negaWord=list(filter(lambda x:x in arr[0],list_))[0]
+	D=arr[0].replace(negaWord,"").strip()
+	P=" ".join(arr[1].strip().split()[1:])
+	try:
+		return neagation[negaWord](D,P)
+	except KeyError:
+		print("Invalid negaWord")
+	return None
+
+print("----------------------------\n")
+for s in listExpression:
+	print(nega(s))

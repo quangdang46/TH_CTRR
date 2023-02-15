@@ -1,10 +1,11 @@
+# Ex3
 D = "people"
 P = "is blond"
 Q = "is westerner"
 print("For all", D, ", if they are", P, "then they are", Q)
 
 
-D = "people"
+D = "person"
 P = "hair is black"
 Q = "is westerner"
 print("Exist a", D, ", whose", P, "but is a", Q)
@@ -27,4 +28,3 @@ print("For every", D, ", if they", P, ", then they",Q)
 D = "birds"
 P = "have wings but can't fly"
 print("Exist a ",D,"that ",P )
-
