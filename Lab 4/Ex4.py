@@ -1,6 +1,7 @@
 from math import *
+# Ex4
 def a():
-  if sum( [(x+y)**2 for x in range(11)  for y in range(11)] )> sum( [(x+2*y)**2 for x in range(10)  for y in range(10)] ):
+  if sum( [(x+y)**2 for x in range(11) for y in range(11)] )> sum( [(x+2*y)**2 for x in range(10)  for y in range(10)] ):
     print("the given statement is correct")
   else:
     print("the given statement is incorrect")

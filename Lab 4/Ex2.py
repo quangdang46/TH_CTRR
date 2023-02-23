@@ -1,5 +1,7 @@
-from math import sqrt
+from math import *
 
+
+# Ex2
 def a():
   for x in range(0, 101):
     if x**2 == 15**2 + 16**2:
