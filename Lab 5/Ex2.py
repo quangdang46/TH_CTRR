@@ -1,0 +1,3 @@
+print("If you understand how to solve all the exercises in the book, then you will get a good grade in the midterm exam, and if you get a good grade in the midterm exam, it means that you understand how to solve all the exercises in the book.")
+print("You understand how to solve all the exercises in the book, but you did not get a good grade in the midterm exam.")
+print("If you understand how to solve all the exercises in the book, then you will get a good grade in the midterm exam, and conversely, getting a good grade in the midterm exam means that you understand how to solve all the exercises in the book.")
